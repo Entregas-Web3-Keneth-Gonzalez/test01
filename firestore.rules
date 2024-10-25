@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+	match /databases/{database}/documents {
+		// Reglas para la colección datosUsuarios
+		match /{datosUsuarios}/{document=**}{
+			allow read: if true;
+			allow create: if request.resource.data.idemp is string &&
+							 request.resource.data.usuario is string &&
+							 request.resource.data.email is string &&
+							 request.resource.data.fechaCreacion is timestamp && // Validar fecha de creación
+							 request.resource.data.ultimoAcceso is timestamp;    // Validar fecha de último acceso
+			allow update: if request.resource.data.ultimoAcceso is timestamp;  // Permitir actualización de último acceso
+			allow delete: if false;
+		}
+		
+		// Reglas para la colección datosZodiaco
+		match /{datosZodiaco}/{document=**}{
+      		allow read: if true;
+      		allow create: if request.resource.data.posic is int &&
+                         	 request.resource.data.signo is string &&
+                         	 request.resource.data.rango is string &&
+                         	 request.resource.data.elemento is string &&   // Validar el campo elemento
+                         	 request.resource.data.astro is string &&      // Validar el campo astro
+                         	 request.resource.data.piedra is string &&     // Validar el campo piedra
+                         	 request.resource.data.url is string;
+      		allow update: if true;
+      		allow delete: if true;
+    	}
+	}
+}
