@@ -10,7 +10,8 @@ const btnLoad  = document.querySelector('#btnLoad');
 const txtElemento = document.querySelector('#txtElemento');
 const txtAstro = document.querySelector('#txtAstro');
 const txtPiedra = document.querySelector('#txtPiedra');
-
+const urlParams = new URLSearchParams(window.location.search);//Accede a la uri
+const docId = urlParams.get('docId');//Sacamos el id de la coleccion seleccionada
 
 btnLoad.addEventListener('click', function(){
      alert("ID del registro: ")
@@ -22,11 +23,12 @@ btnLoad.addEventListener('click', function(){
         const metadata = {
             contentType : archivo.type
         }
+        //mismo codigo de insertar pero usando update y pasando el docid
         const subir = container.child('zodiaco/'+nomarch).put(archivo, metadata);
         subir
             .then(snapshot => snapshot.ref.getDownloadURL())
             .then( url =>{
-                db.collection("datosZodiaco").add({
+                db.collection("datosZodiaco").doc(docId).update({
                     "posic" : parseInt(txtPosic.value),
                     "signo" : txtSigno.value,
                     "rango" : txtRango.value,
@@ -35,7 +37,7 @@ btnLoad.addEventListener('click', function(){
                     "piedra" : txtPiedra.value,
                     "url"   : url
                 }).then(function(docRef) {
-                    alert("ID del registro: " + docRef.id);
+                    alert("REGISTRO ACTUALIZADO, ID del registro: " + docId);
                     limpiar();
                 }).catch(function(FirebaseError) {
                     alert("Error al subir la imagen: " + FirebaseError);

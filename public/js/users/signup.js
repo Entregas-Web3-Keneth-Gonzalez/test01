@@ -1,43 +1,46 @@
 // JavaScript Document
-// create local database firestore variable
-var db = firebase.apps[0].firestore();
-var auth = firebase.apps[0].auth();
+			// create local database firestore variable
+			var db = firebase.apps[0].firestore();
+			var auth = firebase.apps[0].auth();
 
-// create local from webpage inputs
-const txtNombre = document.querySelector('#txtNombre');
-const txtEmail = document.querySelector('#txtEmail');
-const txtContra = document.querySelector('#txtContra');
+			// create local from webpage inputs
+			const txtNombre = document.querySelector('#txtNombre');
+			const txtEmail = document.querySelector('#txtEmail');
+			const txtContra = document.querySelector('#txtContra');
 
-// create local insert button
-const btnInsUser = document.querySelector('#btnInsUser');
+			// create local insert button
+			const btnInsUser = document.querySelector('#btnInsUser');
 
-// assign button listener
-btnInsUser.addEventListener('click', function () {
-    const dateCreated = new Date(); // Obtener la fecha de creación
-    auth.createUserWithEmailAndPassword(txtEmail.value, txtContra.value)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            db.collection("datosUsuarios").add({
-                "idemp": user.uid,
-                "usuario": txtNombre.value,
-                "email": user.email,
-                "fechaCreacion": dateCreated, // Añadir fecha de creación
-                "ultimoAcceso": dateCreated // Inicialmente la misma que fecha de creación
-            }).then(function (docRef) {
-                alert("Usuario agregado satisfactoriamente");
-                limpiar();
-            }).catch(function (FirebaseError) {
-                alert("Error al registrar datos del usuario." + FirebaseError);
-            });
-        })
-        .catch((error) => {
-            alert("Error al agregar el nuevo usuario: " + error.message);
-        });
-});
+			const fechaCreacion = new Date();
 
-function limpiar() {
-    txtNombre.value = '';
-    txtEmail.value = '';
-    txtContra.value = '';
-    txtNombre.focus();
-}
+			// assign button listener
+			btnInsUser.addEventListener('click', function () {
+				auth.createUserWithEmailAndPassword(txtEmail.value, txtContra.value)
+					.then((userCredential) => {
+						const user = userCredential.user;
+						db.collection("datosUsuarios").add({
+							"idemp": user.uid,
+							"usuario": txtNombre.value,
+							"email": user.email,
+							"fecha de creacion": fechaCreacion,
+							"ultimo acceso": fechaCreacion
+						}).then(function (docRef) {
+							alert("Usuario agregado satisfactoriamente");
+							limpiar();
+						}).catch(function (FirebaseError) {
+							alert("Error al registrar datos del usuario." + FirebaseError);
+						});
+					})
+					.catch((error) => {
+						alert("Error al agregar el nuevo usuario: " + error.message);
+					});
+			});
+			
+			function limpiar(){
+				txtNombre.value = '';
+				txtEmail.value = '';
+				txtContra.value = '';
+				txtNombre.focus();
+			}
+
+			
