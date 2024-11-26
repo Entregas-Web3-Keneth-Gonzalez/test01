@@ -5,15 +5,13 @@ var container = firebase.apps[0].storage().ref();
 const txtPosic = document.querySelector('#txtPosic');
 const txtSigno = document.querySelector('#txtSigno');
 const txtRango = document.querySelector('#txtRango');
-const txtArchi = document.querySelector('#txtArchi');
-const btnLoad  = document.querySelector('#btnLoad');
 const txtElemento = document.querySelector('#txtElemento');
 const txtAstro = document.querySelector('#txtAstro');
 const txtPiedra = document.querySelector('#txtPiedra');
-
+const txtArchi = document.querySelector('#txtArchi');
+const btnLoad  = document.querySelector('#btnLoad');
 
 btnLoad.addEventListener('click', function(){
-     alert("ID del registro: ")
     const archivo = txtArchi.files[0];
     const nomarch = archivo.name;
     if(archivo == null){
@@ -45,13 +43,12 @@ btnLoad.addEventListener('click', function(){
 });
 
 function limpiar(){
-    txtPosic.value = ''
+    txtPosic.value = '';
     txtSigno.value = '';
     txtRango.value = '';
-    txtArchi.value = '';
-    txtElemento.value = '';
-    txtPiedra.value = '';
+    txtElemento.value = 'Fuego';
     txtAstro.value = '';
+    txtPiedra.value = '';
+    txtArchi.value = '';
     txtPosic.focus();
 }
-

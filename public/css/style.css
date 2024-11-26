@@ -1,5 +1,5 @@
 /* CSS Document */
-:root{
+:root {
     --primary: #110C0CFF;
     --light: #FFFFFF;
     --grey1: #EEEEEE;
@@ -9,44 +9,63 @@
     --lblue2: #B4C5E5;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     user-select: none;
     box-sizing: border-box;
 }
 
-.header .navbar {
-    background-color: rgba(255,255,255,0.5) !important;
+/* Estilo para hacer el footer siempre visible al final */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-body{
+body {
+    margin: 0;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+}
+
+.header .navbar {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+body {
     padding-top: 70px;
 }
 
-.formatDiv{
+.formatDiv {
     width: 250px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.imgBlock{
+.imgBlock {
     height: 150px;
     width: 150px;
     margin-right: auto;
     margin-left: auto;
 }
 
-.divAnuncio{
+.divAnuncio {
     background-color: var(--light);
     border: thin solid var(--lblue1);
     border-radius: 5px;
     box-shadow: 2px 2px 5px var(--lblue2);
     float: left;
     margin: 8px;
-    padding-top: 5px;
+    padding: 10px; /* Aumenta el espacio interno */
     text-align: center;
-    width: 160px;
- 
+    width: 180px; /* Ajusta el ancho */
 }
